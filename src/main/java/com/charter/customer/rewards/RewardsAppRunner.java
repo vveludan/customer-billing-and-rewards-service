@@ -1,4 +1,4 @@
-package com.charter;
+package com.charter.customer.rewards;
 
 import com.charter.customer.rewards.domain.Customer;
 import com.charter.customer.rewards.domain.Transaction;

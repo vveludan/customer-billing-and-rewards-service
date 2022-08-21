@@ -1,4 +1,4 @@
-package com.charter;
+package com.charter.customer.rewards;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

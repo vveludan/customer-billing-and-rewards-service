@@ -29,4 +29,7 @@ public class Transaction {
 
     @Column(name = "bill_amt")
     private Double billingAmount;
+
+    @Column(name = "rwrd_pts")
+    private Integer rewardPoints;
 }
