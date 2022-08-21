@@ -26,7 +26,7 @@ public class RewardsAppRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.info("Customers:");
-        List<Customer> customers = customerRepo.findAll();
+        List<Customer> customers = (List<Customer>) customerRepo.findAll();
         log.info("Customers Found: "+ customers.size());
         customerRepo.findAll()
                 .forEach(c -> log.info(c.toString()));
