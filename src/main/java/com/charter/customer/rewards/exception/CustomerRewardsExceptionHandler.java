@@ -9,17 +9,26 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @Slf4j
+@RestControllerAdvice
 public class CustomerRewardsExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException resourceNotFoundException, WebRequest request) {
-        log.error("Resource Not Found", ExceptionUtils.getStackTrace(resourceNotFoundException));
+        log.error(ExceptionUtils.getStackTrace(resourceNotFoundException));
         return buildErrorResponse(resourceNotFoundException, HttpStatus.NOT_FOUND, request);
+    }
+
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Object> handleResourceAlreadyExistsException(ResourceAlreadyExistsException resourceAlreadyExistsException, WebRequest request) {
+        log.error(ExceptionUtils.getStackTrace(resourceAlreadyExistsException));
+        return buildErrorResponse(resourceAlreadyExistsException, HttpStatus.NOT_FOUND, request);
     }
 
     @Override
