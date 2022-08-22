@@ -45,7 +45,7 @@ public class TransactionService {
 
     private Integer computeRewardPoints(Double billingAmount) {
         Integer rewardPoints = 0;
-        Integer billingAmountAsInteger = Integer.valueOf(String.valueOf(billingAmount));
+        Integer billingAmountAsInteger = billingAmount.intValue();
         if(billingAmountAsInteger > 50 && billingAmountAsInteger <=100) {
             rewardPoints = billingAmountAsInteger - 50;
         } else if(billingAmountAsInteger > 100) {
