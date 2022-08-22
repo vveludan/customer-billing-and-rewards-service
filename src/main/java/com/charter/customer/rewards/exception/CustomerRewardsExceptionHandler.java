@@ -5,7 +5,6 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -47,18 +46,18 @@ public class CustomerRewardsExceptionHandler extends ResponseEntityExceptionHand
                                                                   HttpHeaders headers,
                                                                   HttpStatus status,
                                                                   WebRequest request) {
-        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.value(), "Validation error. Check 'errors' field for details.");
-        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
-            errorResponse.addValidationError(fieldError.getField(), fieldError.getDefaultMessage());
-        }
+        ErrorResponse errorResponse = ErrorResponse.builder().status(HttpStatus.UNPROCESSABLE_ENTITY.value()).message("Check for field validation errors.").build();
+        ex.getBindingResult().getFieldErrors().forEach(fieldError -> {
+            errorResponse.addValidationErrorMessage(fieldError.getField(), fieldError.getDefaultMessage());
+        });
         return ResponseEntity.unprocessableEntity().body(errorResponse);
     }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<Object> handleAllUncaughtException(Exception exception, WebRequest request) {
+    public ResponseEntity<Object> handleUnknownException(Exception exception, WebRequest request) {
         log.error(ExceptionUtils.getStackTrace(exception));
-        return buildErrorResponse(exception, "Unknown error occurred", HttpStatus.INTERNAL_SERVER_ERROR, request);
+        return buildErrorResponse(exception, "Unknown exception occurred", HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
     private ResponseEntity<Object> buildErrorResponse(Exception exception,
@@ -71,8 +70,7 @@ public class CustomerRewardsExceptionHandler extends ResponseEntityExceptionHand
                                                       String message,
                                                       HttpStatus httpStatus,
                                                       WebRequest request) {
-        ErrorResponse errorResponse = new ErrorResponse(httpStatus.value(), message);
-        return ResponseEntity.status(httpStatus).body(errorResponse);
+        return ResponseEntity.status(httpStatus).body(ErrorResponse.builder().status(httpStatus.value()).message(message).build());
     }
 
 }
