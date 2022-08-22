@@ -2,6 +2,7 @@ package com.charter.customer.rewards.controller;
 
 import com.charter.customer.rewards.domain.Customer;
 import com.charter.rewards.service.CustomerService;
+import com.charter.rewards.service.TransactionService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
