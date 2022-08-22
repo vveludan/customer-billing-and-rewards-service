@@ -53,11 +53,11 @@ public class CustomerRewardsExceptionHandler extends ResponseEntityExceptionHand
         return ResponseEntity.unprocessableEntity().body(errorResponse);
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(Throwable.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<Object> handleUnknownException(Exception exception, WebRequest request) {
+    public ResponseEntity<Object> handleUnknownErrorOrException(Exception exception, WebRequest request) {
         log.error(ExceptionUtils.getStackTrace(exception));
-        return buildErrorResponse(exception, "Unknown exception occurred", HttpStatus.INTERNAL_SERVER_ERROR, request);
+        return buildErrorResponse(exception, "Unknown Error or Exception Occurred", HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
     private ResponseEntity<Object> buildErrorResponse(Exception exception,
