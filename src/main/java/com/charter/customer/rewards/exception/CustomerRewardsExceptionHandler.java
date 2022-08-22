@@ -20,14 +20,14 @@ public class CustomerRewardsExceptionHandler extends ResponseEntityExceptionHand
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException resourceNotFoundException, WebRequest request) {
         log.error(ExceptionUtils.getStackTrace(resourceNotFoundException));
-        return buildErrorResponse(resourceNotFoundException, HttpStatus.NOT_FOUND, request);
+        return buildErrorResponse(resourceNotFoundException.getMessage(), HttpStatus.NOT_FOUND, request);
     }
 
     @ExceptionHandler(ResourceAlreadyExistsException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleResourceAlreadyExistsException(ResourceAlreadyExistsException resourceAlreadyExistsException, WebRequest request) {
         log.error(ExceptionUtils.getStackTrace(resourceAlreadyExistsException));
-        return buildErrorResponse(resourceAlreadyExistsException, HttpStatus.NOT_FOUND, request);
+        return buildErrorResponse(resourceAlreadyExistsException.getMessage(), HttpStatus.NOT_FOUND, request);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class CustomerRewardsExceptionHandler extends ResponseEntityExceptionHand
             HttpHeaders headers,
             HttpStatus status,
             WebRequest request) {
-        return buildErrorResponse(ex, status, request);
+        return buildErrorResponse(ex.getMessage(), status, request);
     }
 
     @Override
@@ -57,17 +57,10 @@ public class CustomerRewardsExceptionHandler extends ResponseEntityExceptionHand
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> handleUnknownErrorOrException(Exception exception, WebRequest request) {
         log.error(ExceptionUtils.getStackTrace(exception));
-        return buildErrorResponse(exception, "Unknown Error or Exception Occurred", HttpStatus.INTERNAL_SERVER_ERROR, request);
+        return buildErrorResponse( "Unknown Error or Exception Occurred", HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
-    private ResponseEntity<Object> buildErrorResponse(Exception exception,
-                                                      HttpStatus httpStatus,
-                                                      WebRequest request) {
-        return buildErrorResponse(exception, exception.getMessage(), httpStatus, request);
-    }
-
-    private ResponseEntity<Object> buildErrorResponse(Exception exception,
-                                                      String message,
+    private ResponseEntity<Object> buildErrorResponse(String message,
                                                       HttpStatus httpStatus,
                                                       WebRequest request) {
         return ResponseEntity.status(httpStatus).body(ErrorResponse.builder().status(httpStatus.value()).message(message).build());
