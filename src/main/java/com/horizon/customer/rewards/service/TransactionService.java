@@ -9,6 +9,7 @@ import com.horizon.customer.rewards.repos.TransactionRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,6 +33,14 @@ public class TransactionService {
                 .rewardPoints(computeRewardPoints(inputTransaction.getBillingAmount()))
                 .build();
         return transactionRepo.save(txnToBeSaved);
+    }
+
+    public Transaction getTransactionById(Long txnId) {
+        return transactionRepo.findById(txnId).orElseThrow(() -> new ResourceNotFoundException("Transaction not found for id: "+ txnId));
+    }
+
+    public List<Transaction> getAllTransactions() {
+        return transactionRepo.findAll();
     }
 
     private Integer computeRewardPoints(Double billingAmount) {
