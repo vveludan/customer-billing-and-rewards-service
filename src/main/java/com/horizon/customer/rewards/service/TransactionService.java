@@ -53,6 +53,11 @@ public class TransactionService {
         return transactionRepo.save(existingTxn);
     }
 
+    public void deleteTransaction(Long txnId) {
+        Transaction existingTxn = transactionRepo.findById(txnId).orElseThrow(() -> new ResourceNotFoundException("Transaction doesn't exist for transaction id:"+ txnId));
+        transactionRepo.delete(existingTxn);
+    }
+
     private Integer computeRewardPoints(Double billingAmount) {
         Integer rewardPoints = 0;
         Integer billingAmountAsInteger = billingAmount.intValue();
