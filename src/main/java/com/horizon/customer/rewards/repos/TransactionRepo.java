@@ -1,6 +1,6 @@
-package com.charter.customer.rewards.repos;
+package com.horizon.customer.rewards.repos;
 
-import com.charter.customer.rewards.domain.Transaction;
+import com.horizon.customer.rewards.domain.Transaction;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

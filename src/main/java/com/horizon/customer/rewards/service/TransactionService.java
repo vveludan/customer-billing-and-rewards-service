@@ -1,11 +1,11 @@
-package com.charter.rewards.service;
+package com.horizon.customer.rewards.service;
 
-import com.charter.customer.rewards.domain.Customer;
-import com.charter.customer.rewards.domain.Transaction;
-import com.charter.customer.rewards.exception.ResourceAlreadyExistsException;
-import com.charter.customer.rewards.exception.ResourceNotFoundException;
-import com.charter.customer.rewards.repos.CustomerRepo;
-import com.charter.customer.rewards.repos.TransactionRepo;
+import com.horizon.customer.rewards.domain.Customer;
+import com.horizon.customer.rewards.domain.Transaction;
+import com.horizon.customer.rewards.exception.ResourceAlreadyExistsException;
+import com.horizon.customer.rewards.exception.ResourceNotFoundException;
+import com.horizon.customer.rewards.repos.CustomerRepo;
+import com.horizon.customer.rewards.repos.TransactionRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

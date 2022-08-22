@@ -1,4 +1,4 @@
-package com.charter.customer.rewards.exception;
+package com.horizon.customer.rewards.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;

@@ -8,7 +8,7 @@
 		<version>2.7.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.charter</groupId>
+	<groupId>com.horizon</groupId>
 	<artifactId>customer-rewards-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>customer-rewards-service</name>

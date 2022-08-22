@@ -1,4 +1,4 @@
-package com.charter.customer.rewards.exception;
+package com.horizon.customer.rewards.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

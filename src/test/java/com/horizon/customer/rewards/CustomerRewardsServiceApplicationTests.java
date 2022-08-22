@@ -1,4 +1,4 @@
-package com.charter.customer.rewards;
+package com.horizon.customer.rewards;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Disabled;

@@ -1,13 +1,13 @@
-package com.charter.customer.rewards;
+package com.horizon.customer.rewards;
 
-import com.charter.customer.rewards.domain.Customer;
-import com.charter.customer.rewards.domain.Transaction;
+import com.horizon.customer.rewards.domain.Customer;
+import com.horizon.customer.rewards.domain.Transaction;
+import com.horizon.customer.rewards.repos.CustomerRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import com.charter.customer.rewards.repos.CustomerRepo;
-import com.charter.customer.rewards.repos.TransactionRepo;
+import com.horizon.customer.rewards.repos.TransactionRepo;
 
 import javax.transaction.Transactional;
 import java.util.List;

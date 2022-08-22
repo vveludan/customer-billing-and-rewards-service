@@ -1,7 +1,7 @@
-package com.charter.customer.rewards;
+package com.horizon.customer.rewards;
 
-import com.charter.customer.rewards.domain.Customer;
-import com.charter.customer.rewards.domain.Transaction;
+import com.horizon.customer.rewards.domain.Customer;
+import com.horizon.customer.rewards.domain.Transaction;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;

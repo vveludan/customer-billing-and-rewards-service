@@ -1,4 +1,4 @@
-package com.charter.customer.rewards.domain;
+package com.horizon.customer.rewards.domain;
 
 import lombok.*;
 

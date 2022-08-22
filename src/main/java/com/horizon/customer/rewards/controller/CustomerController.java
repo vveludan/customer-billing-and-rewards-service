@@ -1,10 +1,8 @@
-package com.charter.customer.rewards.controller;
+package com.horizon.customer.rewards.controller;
 
-import com.charter.customer.rewards.domain.Customer;
-import com.charter.rewards.service.CustomerService;
-import com.charter.rewards.service.TransactionService;
+import com.horizon.customer.rewards.domain.Customer;
+import com.horizon.customer.rewards.service.CustomerService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
