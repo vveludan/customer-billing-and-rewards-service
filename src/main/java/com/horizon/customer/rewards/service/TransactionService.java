@@ -8,6 +8,7 @@ import com.horizon.customer.rewards.repos.CustomerRepo;
 import com.horizon.customer.rewards.repos.TransactionRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +20,7 @@ public class TransactionService {
     private final TransactionRepo transactionRepo;
     private final CustomerRepo customerRepo;
 
+    @Transactional
     public Transaction createTransaction(Transaction inputTransaction) {
         Optional<Transaction> existingTxn = transactionRepo.findById(inputTransaction.getId());
         if(existingTxn.isPresent()) {
@@ -42,7 +44,7 @@ public class TransactionService {
     public List<Transaction> getAllTransactions() {
         return transactionRepo.findAll();
     }
-
+    @Transactional
     public Transaction updateTransaction(Transaction inputTransaction) {
         Transaction existingTxn = transactionRepo.findById(inputTransaction.getId()).orElseThrow(() -> new ResourceNotFoundException("Transaction doesn't exist for transaction id:"+ inputTransaction.getId()));
         existingTxn.setBillingAmount(inputTransaction.getBillingAmount());
@@ -52,7 +54,7 @@ public class TransactionService {
         existingTxn.setRewardPoints(computeRewardPoints(inputTransaction.getBillingAmount()));
         return transactionRepo.save(existingTxn);
     }
-
+    @Transactional
     public void deleteTransaction(Long txnId) {
         Transaction existingTxn = transactionRepo.findById(txnId).orElseThrow(() -> new ResourceNotFoundException("Transaction doesn't exist for transaction id:"+ txnId));
         transactionRepo.delete(existingTxn);

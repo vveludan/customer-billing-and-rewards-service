@@ -6,6 +6,7 @@ import com.horizon.customer.rewards.exception.ResourceNotFoundException;
 import com.horizon.customer.rewards.repos.CustomerRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,7 @@ public class CustomerService {
         return customerRepo.findAll();
     }
 
+    @Transactional
     public Customer createCustomer(Customer inputCustomer) {
         Optional<Customer> customerAlreadyExists = customerRepo.findById(inputCustomer.getId());
         if(customerAlreadyExists.isPresent()) {
@@ -36,14 +38,14 @@ public class CustomerService {
                 .build();
         return customerRepo.save(customerToBeSaved);
     }
-
+    @Transactional
     public Customer updateCustomer(Customer inputCustomer) {
         Customer existingCustomer = customerRepo.findById(inputCustomer.getId()).orElseThrow(() -> new ResourceNotFoundException("Customer not found for customerId: "+ inputCustomer.getId()));
         existingCustomer.setFirstName(inputCustomer.getFirstName());
         existingCustomer.setLastName(inputCustomer.getLastName());
         return customerRepo.save(existingCustomer);
     }
-
+    @Transactional
     public void deleteCustomer(Long customerId) {
         Customer existingCustomer = customerRepo.findById(customerId).orElseThrow(() -> new ResourceNotFoundException("Customer not found for customerId: "+ customerId));
         customerRepo.delete(existingCustomer);
