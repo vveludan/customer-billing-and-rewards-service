@@ -11,20 +11,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CustomerRewardsConfig {
 
- /*   @Autowired
-    CustomerRepo customerRepo;
-
-    @Autowired
-    TransactionRepo transactionRepo;
-
-    @Bean
-    CustomerService customerService() {
-        return new CustomerService(customerRepo);
-    }
-
-    @Bean
-    TransactionService transactionService() {
-        return new TransactionService(transactionRepo, customerRepo);
-    }*/
+ 
 
 }
