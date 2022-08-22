@@ -33,4 +33,9 @@ public class TransactionController {
         }
         return new ResponseEntity<>(allTxns, HttpStatus.OK);
     }
+
+    @PutMapping("/transactions")
+    public ResponseEntity<Transaction> updateTransaction(@RequestBody Transaction transaction) {
+        return new ResponseEntity<>(transactionService.updateTransaction(transaction), HttpStatus.OK);
+    }
 }
