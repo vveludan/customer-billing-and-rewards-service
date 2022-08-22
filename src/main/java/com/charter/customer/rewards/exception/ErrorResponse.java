@@ -8,18 +8,15 @@ import java.util.List;
 import java.util.Objects;
 
 @Data
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class ErrorResponse {
     private final int status;
     private final String message;
-    private List<ValidationErrorMessage> validationErrorMessages;
+    @Builder.Default private List<ValidationErrorMessage> validationErrorMessages = new ArrayList<>();
 
     public void addValidationErrorMessage(String field, String message){
-        if(Objects.isNull(validationErrorMessages)){
-            validationErrorMessages = new ArrayList<>();
-        }
         validationErrorMessages.add(ValidationErrorMessage.builder().field(field).message(message).build());
     }
 }
