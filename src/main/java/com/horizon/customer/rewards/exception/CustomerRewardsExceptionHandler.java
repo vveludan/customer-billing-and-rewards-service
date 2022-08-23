@@ -24,10 +24,10 @@ public class CustomerRewardsExceptionHandler extends ResponseEntityExceptionHand
     }
 
     @ExceptionHandler(ResourceAlreadyExistsException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.CONFLICT)
     public ResponseEntity<Object> handleResourceAlreadyExistsException(ResourceAlreadyExistsException resourceAlreadyExistsException, WebRequest request) {
         log.error(ExceptionUtils.getStackTrace(resourceAlreadyExistsException));
-        return buildErrorResponse(resourceAlreadyExistsException.getMessage(), HttpStatus.NOT_FOUND, request);
+        return buildErrorResponse(resourceAlreadyExistsException.getMessage(), HttpStatus.CONFLICT, request);
     }
 
     @Override

@@ -29,7 +29,7 @@ public class CustomerService {
     public Customer createCustomer(Customer inputCustomer) {
         Optional<Customer> customerAlreadyExists = customerRepo.findById(inputCustomer.getId());
         if(customerAlreadyExists.isPresent()) {
-            throw new ResourceAlreadyExistsException("Customer already exists with Customer Id: "+ inputCustomer.getId());
+            throw new ResourceAlreadyExistsException("Cannot Create Customer as Customer already exists with Customer Id: "+ inputCustomer.getId());
         }
 
         Customer customerToBeSaved = Customer.builder()
@@ -42,13 +42,13 @@ public class CustomerService {
     }
     @Transactional
     public Customer updateCustomer(Customer inputCustomer) {
-        Customer existingCustomer = customerRepo.findById(inputCustomer.getId()).orElseThrow(() -> new ResourceNotFoundException("Customer not found for customerId: "+ inputCustomer.getId()));
+        Customer existingCustomer = customerRepo.findById(inputCustomer.getId()).orElseThrow(() -> new ResourceNotFoundException("Cannot Update Customer as Customer not found for customerId: "+ inputCustomer.getId()));
         existingCustomer.setAddress(inputCustomer.getAddress());
         return customerRepo.save(existingCustomer);
     }
     @Transactional
     public void deleteCustomer(String customerId) {
-        Customer existingCustomer = customerRepo.findById(customerId).orElseThrow(() -> new ResourceNotFoundException("Customer not found for customerId: "+ customerId));
+        Customer existingCustomer = customerRepo.findById(customerId).orElseThrow(() -> new ResourceNotFoundException("Cannot Delete Customer as Customer not found for customerId: "+ customerId));
         customerRepo.delete(existingCustomer);
     }
 
