@@ -1,6 +1,7 @@
 package com.horizon.customer.rewards.service;
 
 import com.horizon.customer.rewards.domain.Customer;
+import com.horizon.customer.rewards.domain.CustomerRewardPointsReport;
 import com.horizon.customer.rewards.domain.Transaction;
 import com.horizon.customer.rewards.repos.CustomerRepo;
 import com.horizon.customer.rewards.repos.TransactionRepo;
@@ -22,17 +23,20 @@ public class RewardSummaryService {
     private final TransactionRepo transactionRepo;
     private final CustomerRepo customerRepo;
 
-    public Map<Customer, Integer> getMonthlyRewardReport(String month) {
+    public List<CustomerRewardPointsReport> getMonthlyRewardReport(String month) {
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(month, dateTimeFormatter);
-        log.info("localDate: "+ localDate.toString());
         List<Transaction> monthlyTxns = transactionRepo.findByBillingDate(localDate);
-        if(monthlyTxns != null) {
-            monthlyTxns.forEach(txn -> log.info("Txn: "+ txn.toString()));
-        }
-        Map<Customer, Integer> monthlyRewardsReport = monthlyTxns.stream().collect(toMap(Transaction::getCustomer, Transaction::getRewardPoints));
-        return monthlyRewardsReport;
+        List<CustomerRewardPointsReport> customerRewardPointsReports = monthlyTxns.stream()
+                .map(txn -> {
+                    return CustomerRewardPointsReport.builder()
+                            .customer(txn.getCustomer())
+                            .totalPoints(txn.getRewardPoints())
+                            .build();
+                })
+                .collect(toList());
+        return customerRewardPointsReports;
     }
 
 }

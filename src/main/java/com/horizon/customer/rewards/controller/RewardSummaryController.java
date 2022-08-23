@@ -1,6 +1,7 @@
 package com.horizon.customer.rewards.controller;
 
 import com.horizon.customer.rewards.domain.Customer;
+import com.horizon.customer.rewards.domain.CustomerRewardPointsReport;
 import com.horizon.customer.rewards.domain.Transaction;
 import com.horizon.customer.rewards.service.RewardSummaryService;
 import lombok.AllArgsConstructor;
@@ -22,11 +23,11 @@ public class RewardSummaryController {
     private final RewardSummaryService rewardSummaryService;
 
     @GetMapping("/monthlyreport")
-    public ResponseEntity<Map<Customer, Integer>> getMonthlyReport(@RequestParam String month) {
-        Map<Customer, Integer> monthlyRewardReport = rewardSummaryService.getMonthlyRewardReport(month);
-        if(monthlyRewardReport == null || monthlyRewardReport.isEmpty()) {
+    public ResponseEntity<List<CustomerRewardPointsReport>> getMonthlyReport(@RequestParam String month) {
+        List<CustomerRewardPointsReport> monthlyRewardReports = rewardSummaryService.getMonthlyRewardReport(month);
+        if(monthlyRewardReports == null || monthlyRewardReports.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(monthlyRewardReport, HttpStatus.OK);
+        return new ResponseEntity<>(monthlyRewardReports, HttpStatus.OK);
     }
 }

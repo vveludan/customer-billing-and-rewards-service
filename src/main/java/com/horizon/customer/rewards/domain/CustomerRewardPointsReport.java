@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MonthlyReport {
+public class CustomerRewardPointsReport {
     private Customer customer;
     private Integer totalPoints;
 }
