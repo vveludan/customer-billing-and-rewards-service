@@ -23,7 +23,7 @@ public class RewardSummaryService {
     private final TransactionRepo transactionRepo;
     private final CustomerRepo customerRepo;
 
-    public List<CustomerRewardPointsReport> getMonthlyRewardReport(String month) {
+    public List<CustomerRewardPointsReport> getMonthlyRewardPointsReport(String month) {
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(month, dateTimeFormatter);
@@ -36,6 +36,24 @@ public class RewardSummaryService {
                             .build();
                 })
                 .collect(toList());
+        return customerRewardPointsReports;
+    }
+
+    public List<CustomerRewardPointsReport> getQuarterlyRewardPointsReport(String quarterStartDate, String quarterEndDate) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate quarterStartDateValue = LocalDate.parse(quarterStartDate, dateTimeFormatter);
+        LocalDate quarterEndDateValue = LocalDate.parse(quarterEndDate, dateTimeFormatter);
+        List<Transaction> quarterlyTxns = transactionRepo.findByBillingDateBetween(quarterStartDateValue, quarterEndDateValue);
+        Map<Customer, Integer> quarterlyRewardPointsReport = quarterlyTxns.stream()
+                .collect(groupingBy(Transaction::getCustomer, summingInt(Transaction::getRewardPoints)));
+        List<CustomerRewardPointsReport> customerRewardPointsReports = quarterlyRewardPointsReport.keySet().stream()
+                .map(customer -> {
+                    return CustomerRewardPointsReport.builder()
+                            .customer(customer)
+                            .totalPoints(quarterlyRewardPointsReport.get(customer))
+                            .build();
+                })
+                 .collect(toList());
         return customerRewardPointsReports;
     }
 

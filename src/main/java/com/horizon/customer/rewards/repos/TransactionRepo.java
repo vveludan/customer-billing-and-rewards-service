@@ -12,4 +12,5 @@ import java.util.List;
 public interface TransactionRepo extends JpaRepository<Transaction, Long> {
 
     List<Transaction> findByBillingDate(LocalDate localDate);
+    List<Transaction> findByBillingDateBetween(LocalDate quarterStartDate, LocalDate quarterEndDate);
 }
