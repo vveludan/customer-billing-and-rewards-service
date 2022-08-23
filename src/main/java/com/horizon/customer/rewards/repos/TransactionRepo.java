@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface TransactionRepo extends JpaRepository<Transaction, Long> {
+public interface TransactionRepo extends JpaRepository<Transaction, String> {
 
     List<Transaction> findByBillingDate(LocalDate localDate);
     List<Transaction> findByBillingDateBetween(LocalDate quarterStartDate, LocalDate quarterEndDate);

@@ -14,8 +14,8 @@ public class CreateJson {
         ObjectMapper mapper = JsonMapper.builder()
                 .addModule(new JavaTimeModule())
                 .build();
-        Customer customer = Customer.builder().id(1L).build();
-        Transaction txn = Transaction.builder().id(1L).billingDate(LocalDate.of(2022, 1, 31)).billingAmount(10.0).customer(customer).build();
+        Customer customer = Customer.builder().id("1").build();
+        Transaction txn = Transaction.builder().id("1").billingDate(LocalDate.of(2022, 1, 31)).billingAmount(10.0).customer(customer).build();
         String txnAsString = mapper.writeValueAsString(txn);
         System.out.println(txnAsString);
     }

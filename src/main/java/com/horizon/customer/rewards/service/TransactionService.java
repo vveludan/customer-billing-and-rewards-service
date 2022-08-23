@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -22,13 +23,9 @@ public class TransactionService {
 
     @Transactional
     public Transaction createTransaction(Transaction inputTransaction) {
-        Optional<Transaction> existingTxn = transactionRepo.findById(inputTransaction.getId());
-        if(existingTxn.isPresent()) {
-            throw new ResourceAlreadyExistsException("Transaction Already Exists with id: "+ inputTransaction.getId());
-        }
         Customer customer = customerRepo.findById(inputTransaction.getCustomer().getId()).orElseThrow(() -> new ResourceNotFoundException("Customer not found for customerId: "+ inputTransaction.getCustomer().getId()));
         Transaction txnToBeSaved = Transaction.builder()
-                .id(inputTransaction.getId())
+                .id(UUID.randomUUID().toString())
                 .billingAmount(inputTransaction.getBillingAmount())
                 .billingDate(inputTransaction.getBillingDate())
                 .customer(customer)
@@ -37,7 +34,7 @@ public class TransactionService {
         return transactionRepo.save(txnToBeSaved);
     }
 
-    public Transaction getTransactionById(Long txnId) {
+    public Transaction getTransactionById(String txnId) {
         return transactionRepo.findById(txnId).orElseThrow(() -> new ResourceNotFoundException("Transaction not found for id: "+ txnId));
     }
 
@@ -55,7 +52,7 @@ public class TransactionService {
         return transactionRepo.save(existingTxn);
     }
     @Transactional
-    public void deleteTransaction(Long txnId) {
+    public void deleteTransaction(String txnId) {
         Transaction existingTxn = transactionRepo.findById(txnId).orElseThrow(() -> new ResourceNotFoundException("Transaction doesn't exist for transaction id:"+ txnId));
         transactionRepo.delete(existingTxn);
     }

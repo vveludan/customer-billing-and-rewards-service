@@ -10,13 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
 public class CustomerService {
     private final CustomerRepo customerRepo;
 
-    public Customer getCustomerById(Long customerId) {
+    public Customer getCustomerById(String customerId) {
         return customerRepo.findById(customerId).orElseThrow(() -> new ResourceNotFoundException("Customer not found for customerId: "+ customerId));
     }
 
@@ -35,18 +36,18 @@ public class CustomerService {
                 .id(inputCustomer.getId())
                 .firstName(inputCustomer.getFirstName())
                 .lastName(inputCustomer.getLastName())
+                .address(inputCustomer.getAddress())
                 .build();
         return customerRepo.save(customerToBeSaved);
     }
     @Transactional
     public Customer updateCustomer(Customer inputCustomer) {
         Customer existingCustomer = customerRepo.findById(inputCustomer.getId()).orElseThrow(() -> new ResourceNotFoundException("Customer not found for customerId: "+ inputCustomer.getId()));
-        existingCustomer.setFirstName(inputCustomer.getFirstName());
-        existingCustomer.setLastName(inputCustomer.getLastName());
+        existingCustomer.setAddress(inputCustomer.getAddress());
         return customerRepo.save(existingCustomer);
     }
     @Transactional
-    public void deleteCustomer(Long customerId) {
+    public void deleteCustomer(String customerId) {
         Customer existingCustomer = customerRepo.findById(customerId).orElseThrow(() -> new ResourceNotFoundException("Customer not found for customerId: "+ customerId));
         customerRepo.delete(existingCustomer);
     }

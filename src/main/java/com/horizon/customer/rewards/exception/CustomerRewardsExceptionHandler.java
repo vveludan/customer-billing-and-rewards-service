@@ -57,7 +57,7 @@ public class CustomerRewardsExceptionHandler extends ResponseEntityExceptionHand
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> handleUnknownErrorOrException(Exception exception, WebRequest request) {
         log.error(ExceptionUtils.getStackTrace(exception));
-        return buildErrorResponse( "Unknown Error or Exception Occurred", HttpStatus.INTERNAL_SERVER_ERROR, request);
+        return buildErrorResponse( exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
     private ResponseEntity<Object> buildErrorResponse(String message,
