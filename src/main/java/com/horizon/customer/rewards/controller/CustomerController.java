@@ -2,6 +2,9 @@ package com.horizon.customer.rewards.controller;
 
 import com.horizon.customer.rewards.domain.Customer;
 import com.horizon.customer.rewards.service.CustomerService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +15,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/rewards")
+@ApiOperation("Customer API")
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -21,6 +25,11 @@ public class CustomerController {
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
     @GetMapping("/customers")
+    @ApiOperation(value = " Get All Customers")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully Retrieved All Customers"),
+            @ApiResponse(code = 204, message = " No Customers Found")
+    })
     public ResponseEntity<List<Customer>> getAllCustomers() {
         List<Customer> customers = customerService.getAllCustomers();
         if(customers == null || customers.isEmpty()) {
@@ -29,16 +38,27 @@ public class CustomerController {
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
     @PostMapping("/customers")
+    @ApiOperation(value = "Create Customer", notes = "Returns Created Customer")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successfully Created Customer"),
+            @ApiResponse(code = 500, message = "Internal Error Occurred While Creating Customer")
+    })
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
         return new ResponseEntity<>(customerService.createCustomer(customer), HttpStatus.CREATED);
     }
 
     @PutMapping("/customers")
+    @ApiOperation(value = "Update Customer", notes = "Returns Updated Customer")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully Updated Customer"),
+            @ApiResponse(code = 500, message = "Internal Error Occurred while Updating Customer")
+    })
     public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer) {
         return new ResponseEntity<>(customerService.updateCustomer(customer), HttpStatus.OK);
     }
 
     @DeleteMapping("/customers/{id}")
+    @ApiOperation(value = "Delete Customer", notes = "Returns 204 status on Success")
     public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable("id") String id) {
         customerService.deleteCustomer(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
