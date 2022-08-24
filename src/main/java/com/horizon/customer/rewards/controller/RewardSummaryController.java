@@ -25,7 +25,7 @@ public class RewardSummaryController {
     private final RewardSummaryService rewardSummaryService;
 
     @GetMapping("/monthlyreport")
-    @ApiOperation(value = "Get Monthly Reward Points Report", notes = "Returns CustomerRewardPointsReports")
+    @ApiOperation(value = "Get Monthly Reward Points Report", notes = "Returns Monthly CustomerRewardPointsReports")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully Retrieved Monthly CustomerRewardPointsReports"),
             @ApiResponse(code = 404, message = "No CustomerRewardPointsReports found for the given month"),
@@ -40,15 +40,14 @@ public class RewardSummaryController {
     }
 
     @GetMapping("/quarterlyreport")
-    @ApiOperation(value = "Get Quarterly Reward Points Report", notes = "Returns CustomerRewardPointsReports")
+    @ApiOperation(value = "Get Quarterly Reward Points Report", notes = "Returns Quarterly CustomerRewardPointsReports")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully Retrieved Quarterly CustomerRewardPointsReports"),
             @ApiResponse(code = 404, message = "No CustomerRewardPointsReports found for the given quarter"),
             @ApiResponse(code = 500, message = "Internal Error Occurred While Retrieving Quarterly CustomerRewardPointsReports")
     })
-    public ResponseEntity<List<CustomerRewardPointsReport>> getQuarterlyRewardPointsReport(@RequestParam @ApiParam(name = "quarterStartDate", example = "2022-01-31 (yyyy-MM-dd)") String quarterStartDate,
-                                                                               @RequestParam @ApiParam(name = "quarterEndDate", example = "2022-03-31 (yyyy-MM-dd)") String quarterEndDate) {
-        List<CustomerRewardPointsReport> quarterlyRewardPoints = rewardSummaryService.getQuarterlyRewardPointsReport(quarterStartDate, quarterEndDate);
+    public ResponseEntity<List<CustomerRewardPointsReport>> getQuarterlyRewardPointsReport(@RequestParam @ApiParam(name = "quarter", example = "first") String quarter) {
+        List<CustomerRewardPointsReport> quarterlyRewardPoints = rewardSummaryService.getQuarterlyRewardPointsReport(quarter);
         if(quarterlyRewardPoints == null || quarterlyRewardPoints.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

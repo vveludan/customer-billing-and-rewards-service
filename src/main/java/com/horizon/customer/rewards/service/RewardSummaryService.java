@@ -5,12 +5,15 @@ import com.horizon.customer.rewards.domain.CustomerRewardPointsReport;
 import com.horizon.customer.rewards.domain.Transaction;
 import com.horizon.customer.rewards.repos.CustomerRepo;
 import com.horizon.customer.rewards.repos.TransactionRepo;
+import com.horizon.customer.rewards.service.util.Quarter;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import java.util.Map;
 
@@ -39,11 +42,10 @@ public class RewardSummaryService {
         return customerRewardPointsReports;
     }
 
-    public List<CustomerRewardPointsReport> getQuarterlyRewardPointsReport(String quarterStartDate, String quarterEndDate) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate quarterStartDateValue = LocalDate.parse(quarterStartDate, dateTimeFormatter);
-        LocalDate quarterEndDateValue = LocalDate.parse(quarterEndDate, dateTimeFormatter);
-        List<Transaction> quarterlyTxns = transactionRepo.findByBillingDateBetween(quarterStartDateValue, quarterEndDateValue);
+    public List<CustomerRewardPointsReport> getQuarterlyRewardPointsReport(String quarter) {
+        LocalDate quarterStartDate = getQuarterStartDate(quarter);
+        LocalDate quarterEndDate = getQuarterEndDate(quarterStartDate);
+        List<Transaction> quarterlyTxns = transactionRepo.findByBillingDateBetween(quarterStartDate, quarterEndDate);
         Map<Customer, Integer> quarterlyRewardPointsReport = quarterlyTxns.stream()
                 .collect(groupingBy(Transaction::getCustomer, summingInt(Transaction::getRewardPoints)));
         List<CustomerRewardPointsReport> customerRewardPointsReports = quarterlyRewardPointsReport.keySet().stream()
@@ -57,4 +59,37 @@ public class RewardSummaryService {
         return customerRewardPointsReports;
     }
 
+    private LocalDate getQuarterStartDate(String quarter) {
+        int currentYear = LocalDate.now().getYear();
+        Month firstMonthOfQuarter = computeFirstMonthOfQuarter(quarter);
+        return LocalDate.of(currentYear, firstMonthOfQuarter.getValue(), 01);
+    }
+
+    private LocalDate getQuarterEndDate(LocalDate quarterStartDate) {
+        return quarterStartDate.plusMonths(2)
+                .with(TemporalAdjusters.lastDayOfMonth());
+    }
+
+    private Month computeFirstMonthOfQuarter(String quarter) {
+        Quarter quarterValue = Quarter.getQuarter(quarter);
+        Month month = null;
+        switch (quarterValue) {
+            case FIRST:
+                month = Month.JANUARY;
+                break;
+            case SECOND:
+                month = Month.APRIL;
+                break;
+            case THIRD:
+                month = Month.JULY;
+                break;
+            case FOURTH:
+                month = Month.OCTOBER;
+                break;
+            default:
+                log.error("Invalid quarter found: " + quarter);
+                break;
+        }
+        return month;
+    }
 }
