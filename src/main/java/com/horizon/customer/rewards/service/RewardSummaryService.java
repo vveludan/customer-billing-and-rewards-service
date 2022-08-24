@@ -35,7 +35,7 @@ public class RewardSummaryService {
         }
         LocalDate dateForMonthlyReport = getMonthForMonthlyReport(month.toUpperCase());
         List<Transaction> monthlyTxns = transactionRepo.findByBillingDate(dateForMonthlyReport);
-        List<CustomerRewardPointsReport> customerRewardPointsReports = monthlyTxns.stream()
+        List<CustomerRewardPointsReport> customerRewardPointsReports = monthlyTxns.parallelStream()
                 .map(txn -> {
                     return CustomerRewardPointsReport.builder()
                             .customer(txn.getCustomer())
@@ -53,9 +53,9 @@ public class RewardSummaryService {
         LocalDate quarterStartDate = getQuarterStartDate(quarter.toLowerCase());
         LocalDate quarterEndDate = getQuarterEndDate(quarterStartDate);
         List<Transaction> quarterlyTxns = transactionRepo.findByBillingDateBetween(quarterStartDate, quarterEndDate);
-        Map<Customer, Integer> quarterlyRewardPointsReport = quarterlyTxns.stream()
+        Map<Customer, Integer> quarterlyRewardPointsReport = quarterlyTxns.parallelStream()
                 .collect(groupingBy(Transaction::getCustomer, summingInt(Transaction::getRewardPoints)));
-        List<CustomerRewardPointsReport> customerRewardPointsReports = quarterlyRewardPointsReport.keySet().stream()
+        List<CustomerRewardPointsReport> customerRewardPointsReports = quarterlyRewardPointsReport.keySet().parallelStream()
                 .map(customer -> {
                     return CustomerRewardPointsReport.builder()
                             .customer(customer)

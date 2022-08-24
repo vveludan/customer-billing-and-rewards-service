@@ -15,6 +15,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
+import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -49,6 +50,8 @@ public class RewardSummaryServiceTest {
         CustomerRewardPointsReport customerRewardPointsReport = monthlyRewardPointsReport.get(0);
         assertThat(customerRewardPointsReport.getCustomer()).isEqualTo(createCustomer());
         assertThat(customerRewardPointsReport.getTotalPoints()).isEqualTo(januaryTxnForAllenBorder.getRewardPoints());
+        Mockito.verify(transactionRepo, VerificationModeFactory.times(1)).findByBillingDate(Mockito.any());
+        Mockito.reset(transactionRepo);
     }
 
     @Test
@@ -67,6 +70,9 @@ public class RewardSummaryServiceTest {
         assertThat(reportForAllenBorder.getCustomer()).isEqualTo(createCustomer());
         Integer expectedTotalRewardPoints = quarterlyTransactions.stream().map(txn -> txn.getRewardPoints()).reduce(0, Integer::sum);
         assertThat(reportForAllenBorder.getTotalPoints()).isEqualTo(expectedTotalRewardPoints);
+        Mockito.verify(transactionRepo, VerificationModeFactory.times(1)).findByBillingDateBetween(Mockito.any(), Mockito.any());
+        Mockito.reset(transactionRepo);
+
     }
 
     private Customer createCustomer() {
