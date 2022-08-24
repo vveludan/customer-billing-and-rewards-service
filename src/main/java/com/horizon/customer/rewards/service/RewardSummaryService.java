@@ -8,10 +8,13 @@ import com.horizon.customer.rewards.repos.TransactionRepo;
 import com.horizon.customer.rewards.service.util.Quarter;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.security.PrivilegedAction;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
@@ -27,10 +30,11 @@ public class RewardSummaryService {
     private final CustomerRepo customerRepo;
 
     public List<CustomerRewardPointsReport> getMonthlyRewardPointsReport(String month) {
-
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate localDate = LocalDate.parse(month, dateTimeFormatter);
-        List<Transaction> monthlyTxns = transactionRepo.findByBillingDate(localDate);
+        if(StringUtils.isBlank(month)) {
+            throw new IllegalArgumentException("month cannot be null or empty to get monthly reward points report");
+        }
+        LocalDate dateForMonthlyReport = getMonthForMonthlyReport(month.toUpperCase());
+        List<Transaction> monthlyTxns = transactionRepo.findByBillingDate(dateForMonthlyReport);
         List<CustomerRewardPointsReport> customerRewardPointsReports = monthlyTxns.stream()
                 .map(txn -> {
                     return CustomerRewardPointsReport.builder()
@@ -43,7 +47,10 @@ public class RewardSummaryService {
     }
 
     public List<CustomerRewardPointsReport> getQuarterlyRewardPointsReport(String quarter) {
-        LocalDate quarterStartDate = getQuarterStartDate(quarter);
+        if(StringUtils.isBlank(quarter)) {
+            throw new IllegalArgumentException("quarter value cannot be null or empty to get quarterly reward points report");
+        }
+        LocalDate quarterStartDate = getQuarterStartDate(quarter.toLowerCase());
         LocalDate quarterEndDate = getQuarterEndDate(quarterStartDate);
         List<Transaction> quarterlyTxns = transactionRepo.findByBillingDateBetween(quarterStartDate, quarterEndDate);
         Map<Customer, Integer> quarterlyRewardPointsReport = quarterlyTxns.stream()
@@ -68,6 +75,13 @@ public class RewardSummaryService {
     private LocalDate getQuarterEndDate(LocalDate quarterStartDate) {
         return quarterStartDate.plusMonths(2)
                 .with(TemporalAdjusters.lastDayOfMonth());
+    }
+
+    private LocalDate getMonthForMonthlyReport(String month) {
+        Month monthValue = Month.valueOf(month);
+        int currentYear = LocalDate.now().getYear();
+        YearMonth yearMonth = YearMonth.of(currentYear, monthValue);
+        return yearMonth.atEndOfMonth();
     }
 
     private Month computeFirstMonthOfQuarter(String quarter) {

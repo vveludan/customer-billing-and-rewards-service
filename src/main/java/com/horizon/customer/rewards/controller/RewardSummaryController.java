@@ -31,7 +31,7 @@ public class RewardSummaryController {
             @ApiResponse(code = 404, message = "No CustomerRewardPointsReports found for the given month"),
             @ApiResponse(code = 500, message = "Internal Error Occurred While Retrieving Monthly CustomerRewardPointsReports")
     })
-    public ResponseEntity<List<CustomerRewardPointsReport>> getMonthlyRewardPointsReport(@RequestParam @ApiParam(name = "month", example = "2022-01-31 (yyyy-MM-dd)") String month) {
+    public ResponseEntity<List<CustomerRewardPointsReport>> getMonthlyRewardPointsReport(@RequestParam @ApiParam(name = "month", example = "january thru december or JANUARY thru DECEMBER") String month) {
         List<CustomerRewardPointsReport> monthlyRewardReports = rewardSummaryService.getMonthlyRewardPointsReport(month);
         if(monthlyRewardReports == null || monthlyRewardReports.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -46,7 +46,7 @@ public class RewardSummaryController {
             @ApiResponse(code = 404, message = "No CustomerRewardPointsReports found for the given quarter"),
             @ApiResponse(code = 500, message = "Internal Error Occurred While Retrieving Quarterly CustomerRewardPointsReports")
     })
-    public ResponseEntity<List<CustomerRewardPointsReport>> getQuarterlyRewardPointsReport(@RequestParam @ApiParam(name = "quarter", example = "first") String quarter) {
+    public ResponseEntity<List<CustomerRewardPointsReport>> getQuarterlyRewardPointsReport(@RequestParam @ApiParam(name = "quarter", example = "first/second/third/fourth or FIRST/SECOND/THIRD/FOURTH") String quarter) {
         List<CustomerRewardPointsReport> quarterlyRewardPoints = rewardSummaryService.getQuarterlyRewardPointsReport(quarter);
         if(quarterlyRewardPoints == null || quarterlyRewardPoints.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
