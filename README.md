@@ -12,7 +12,7 @@ After build is done, run the following command from git bash to bring up app.
 docker-compose up
 
 Once the app is up and running. Check app status using: http://localhost:8080/actuator/health
-View customer rewards api using swagger typing: localhost:8080/swagger-ui/
+View customer rewards api using swagger at: http://localhost:8080/swagger-ui/
 
 Refer to the folder project-artifacts to view:
 1. Class Diagram
