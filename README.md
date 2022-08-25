@@ -42,4 +42,5 @@ should be broken into two services: customer-service and billing-service.
 Monthly and quarterly reports are not persisted to DB. If requires then it could be enhanced further to persist.
 Local/Centralized caching should be used instead of retrieving transactions from DB while computing monthly/quarterly reports.
 
+NOTE: Transforming domain classes to DTOs is not done.
 
