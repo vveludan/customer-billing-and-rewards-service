@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  customerrewardsservice:
+    image: rewards/customer-rewards-service:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    environment:
+      PROFILE: "dev"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
