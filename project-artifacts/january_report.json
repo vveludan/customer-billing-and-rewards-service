@@ -1,0 +1,20 @@
+[
+  {
+    "customer": {
+      "id": "111-11-1111",
+      "firstName": "Peter",
+      "lastName": "Pan",
+      "address": "200 Oak Crest Rd, Lafayette, LA 11111"
+    },
+    "totalPoints": 0
+  },
+  {
+    "customer": {
+      "id": "222-22-2222",
+      "firstName": "Chris",
+      "lastName": "Tipton",
+      "address": "300 Oak Crest Rd, Lafayette, LA 11111"
+    },
+    "totalPoints": 20
+  }
+]

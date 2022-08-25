@@ -1,0 +1,146 @@
+[
+  {
+    "id": "48af3425-2fdf-445c-b004-af9e2b008d8b",
+    "customer": {
+      "id": "111-11-1111",
+      "firstName": "Peter",
+      "lastName": "Pan",
+      "address": "200 Oak Crest Rd, Lafayette, LA 11111"
+    },
+    "billingDate": "2022-01-31",
+    "billingAmount": 50,
+    "rewardPoints": 0
+  },
+  {
+    "id": "398055f1-30c1-4296-9d26-082e548f4ed7",
+    "customer": {
+      "id": "111-11-1111",
+      "firstName": "Peter",
+      "lastName": "Pan",
+      "address": "200 Oak Crest Rd, Lafayette, LA 11111"
+    },
+    "billingDate": "2022-02-28",
+    "billingAmount": 75,
+    "rewardPoints": 25
+  },
+  {
+    "id": "cdefc3c7-19f0-4b01-a532-790daac80fa7",
+    "customer": {
+      "id": "111-11-1111",
+      "firstName": "Peter",
+      "lastName": "Pan",
+      "address": "200 Oak Crest Rd, Lafayette, LA 11111"
+    },
+    "billingDate": "2022-03-31",
+    "billingAmount": 120,
+    "rewardPoints": 90
+  },
+  {
+    "id": "363d0ec7-3750-4b9f-afb1-b746b4176742",
+    "customer": {
+      "id": "111-11-1111",
+      "firstName": "Peter",
+      "lastName": "Pan",
+      "address": "200 Oak Crest Rd, Lafayette, LA 11111"
+    },
+    "billingDate": "2022-04-30",
+    "billingAmount": 80,
+    "rewardPoints": 30
+  },
+  {
+    "id": "d2175e03-8fbc-43d7-b0d3-b86c19e169d6",
+    "customer": {
+      "id": "111-11-1111",
+      "firstName": "Peter",
+      "lastName": "Pan",
+      "address": "200 Oak Crest Rd, Lafayette, LA 11111"
+    },
+    "billingDate": "2022-05-31",
+    "billingAmount": 90,
+    "rewardPoints": 40
+  },
+  {
+    "id": "b1936d8b-ab1c-468c-b970-88ad61fca7c1",
+    "customer": {
+      "id": "111-11-1111",
+      "firstName": "Peter",
+      "lastName": "Pan",
+      "address": "200 Oak Crest Rd, Lafayette, LA 11111"
+    },
+    "billingDate": "2022-06-30",
+    "billingAmount": 110,
+    "rewardPoints": 70
+  },
+  {
+    "id": "abb35b77-bb60-4784-b5c3-055298c37842",
+    "customer": {
+      "id": "222-22-2222",
+      "firstName": "Chris",
+      "lastName": "Tipton",
+      "address": "300 Oak Crest Rd, Lafayette, LA 11111"
+    },
+    "billingDate": "2022-01-31",
+    "billingAmount": 70,
+    "rewardPoints": 20
+  },
+  {
+    "id": "bb1db28f-f4a9-4777-bc35-095dac4429cc",
+    "customer": {
+      "id": "222-22-2222",
+      "firstName": "Chris",
+      "lastName": "Tipton",
+      "address": "300 Oak Crest Rd, Lafayette, LA 11111"
+    },
+    "billingDate": "2022-02-28",
+    "billingAmount": 90,
+    "rewardPoints": 40
+  },
+  {
+    "id": "9a9874cc-45fc-4aa1-bc4f-1c9139983429",
+    "customer": {
+      "id": "222-22-2222",
+      "firstName": "Chris",
+      "lastName": "Tipton",
+      "address": "300 Oak Crest Rd, Lafayette, LA 11111"
+    },
+    "billingDate": "2022-03-31",
+    "billingAmount": 100,
+    "rewardPoints": 50
+  },
+  {
+    "id": "b83a6b72-c2f3-4f95-96c5-5e0019a27571",
+    "customer": {
+      "id": "222-22-2222",
+      "firstName": "Chris",
+      "lastName": "Tipton",
+      "address": "300 Oak Crest Rd, Lafayette, LA 11111"
+    },
+    "billingDate": "2022-04-30",
+    "billingAmount": 60,
+    "rewardPoints": 10
+  },
+  {
+    "id": "44a8ba98-9d9c-48a1-b811-d9c7d5d9e1e0",
+    "customer": {
+      "id": "222-22-2222",
+      "firstName": "Chris",
+      "lastName": "Tipton",
+      "address": "300 Oak Crest Rd, Lafayette, LA 11111"
+    },
+    "billingDate": "2022-05-31",
+    "billingAmount": 80,
+    "rewardPoints": 30
+  },
+  {
+    "id": "a4e63eab-c843-46c4-bb53-14f70eff7a8d",
+    "customer": {
+      "id": "222-22-2222",
+      "firstName": "Chris",
+      "lastName": "Tipton",
+      "address": "300 Oak Crest Rd, Lafayette, LA 11111"
+    },
+    "billingDate": "2022-06-30",
+    "billingAmount": 90,
+    "rewardPoints": 40
+  }
+]
