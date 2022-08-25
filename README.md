@@ -15,7 +15,7 @@ Once the app is up and running. Check app status using: http://localhost:8080/ac
 View customer rewards api using swagger at: http://localhost:8080/swagger-ui/
 
 Refer to the folder project-artifacts to view:
-1. Class Diagram
+1. Class Diagrams and Sequence Diagrams
 2. Customers, Transaction, Monthly reports and Quarterly Reports in json format. These files are downloaded by running API from swagger-ui
 
 Domain Model:
