@@ -1,27 +1,11 @@
 package com.horizon.customer.rewards.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.horizon.customer.rewards.CustomerRewardsServiceApplication;
 import com.horizon.customer.rewards.domain.Customer;
-import com.horizon.customer.rewards.domain.CustomerRewardPointsReport;
 import com.horizon.customer.rewards.domain.Transaction;
 import com.horizon.customer.rewards.repos.CustomerRepo;
 import com.horizon.customer.rewards.repos.TransactionRepo;
 import com.horizon.customer.rewards.service.RewardSummaryService;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
-import static org.hamcrest.Matchers.hasSize;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.io.IOException;
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,15 +16,21 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 
@@ -72,7 +62,7 @@ public class RewardSummaryControllerIntegrationTest {
 
     @Before
     public void setUp() {
-        rewardSummaryService = new RewardSummaryService(transactionRepo, customerRepo);
+        rewardSummaryService = new RewardSummaryService(transactionRepo);
         createCustomerAndTransactions();
     }
 

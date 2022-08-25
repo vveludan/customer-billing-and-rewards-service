@@ -21,6 +21,8 @@ public class TransactionService {
     private final TransactionRepo transactionRepo;
     private final CustomerRepo customerRepo;
 
+    private static final int POINTS_FACTOR = 1;
+
     @Transactional
     public Transaction createTransaction(Transaction inputTransaction) {
         Customer customer = customerRepo.findById(inputTransaction.getCustomer().getId()).orElseThrow(() -> new ResourceNotFoundException("Cannot Create Transaction as Customer not found for customerId: "+ inputTransaction.getCustomer().getId()));
@@ -63,7 +65,7 @@ public class TransactionService {
         if(billingAmountAsInteger > 50 && billingAmountAsInteger <=100) {
             rewardPoints = billingAmountAsInteger - 50;
         } else if(billingAmountAsInteger > 100) {
-            rewardPoints = (billingAmountAsInteger - 50) + (billingAmountAsInteger - 100);
+            rewardPoints = (billingAmountAsInteger - 50) * POINTS_FACTOR + (billingAmountAsInteger - 100) * POINTS_FACTOR;
         }
         return rewardPoints;
     }

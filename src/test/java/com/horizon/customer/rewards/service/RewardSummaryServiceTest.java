@@ -3,18 +3,11 @@ package com.horizon.customer.rewards.service;
 import com.horizon.customer.rewards.domain.Customer;
 import com.horizon.customer.rewards.domain.CustomerRewardPointsReport;
 import com.horizon.customer.rewards.domain.Transaction;
-import com.horizon.customer.rewards.repos.CustomerRepo;
 import com.horizon.customer.rewards.repos.TransactionRepo;
-import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-
 import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -23,17 +16,18 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+
 @RunWith(SpringRunner.class)
 public class RewardSummaryServiceTest {
     @MockBean
     private TransactionRepo transactionRepo;
-    @MockBean
-    private CustomerRepo customerRepo;
     private RewardSummaryService rewardSummaryService;
 
     @Before
     public void setUp() {
-        rewardSummaryService = new RewardSummaryService(transactionRepo, customerRepo);
+        rewardSummaryService = new RewardSummaryService(transactionRepo);
     }
 
 
