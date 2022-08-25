@@ -64,8 +64,6 @@ public class RewardSummaryControllerIntegrationTest {
 
     private RewardSummaryService rewardSummaryService;
 
-    //private List<CustomerRewardPointsReport> expectedCustomerRewardPointReport;
-
     @After
     public void resetDb() {
         transactionRepo.deleteAll();
