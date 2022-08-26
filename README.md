@@ -44,3 +44,119 @@ Local/Centralized caching should be used instead of retrieving transactions from
 
 NOTE: Transforming domain classes to DTOs is not done.
 
+**Create Customer End Point**: http://localhost:8080/rewards/api/v1/customers Method: POST
+
+**Create Customer Request Example**:
+{
+"id": "111-11-1111",
+"firstName": "Peter",
+"lastName": "Pan",
+"address": "200 Oak Crest Rd, Lafayette, LA 11111"
+}
+
+**Create Customer Response**:
+{
+"id": "111-11-1111",
+"firstName": "Peter",
+"lastName": "Pan",
+"address": "200 Oak Crest Rd, Lafayette, LA 11111"
+}
+
+**Get All Customers Endpoint**: http://localhost:8080/rewards/api/v1/customers Method: GET
+
+**Get All Customers Response**:
+
+[
+{
+"id": "111-11-1111",
+"firstName": "Peter",
+"lastName": "Pan",
+"address": "200 Oak Crest Rd, Lafayette, LA 11111"
+},
+{
+"id": "222-22-2222",
+"firstName": "Chris",
+"lastName": "Tipton",
+"address": "300 Oak Crest Rd, Lafayette, LA 11111"
+}
+]
+
+**Create Transaction Endpoint**: http://localhost:8080/rewards/api/v1/transactions Method: POST
+
+**Create Transaction Request Example**:
+{
+"customer": {
+"id": "111-11-1111"
+},
+"billingDate": [2022, 2, 28],
+"billingAmount": 75.0
+}
+
+**Create Transaction Response**:
+{
+"id": "4688a4a6-4228-42bf-8bf1-ddaeaa4b5d4f",
+"customer": {
+"id": "111-11-1111",
+"firstName": "Peter",
+"lastName": "Pan",
+"address": "200 Oak Crest Rd, Lafayette, LA 11111"
+},
+"billingDate": "2022-02-28",
+"billingAmount": 75.0,
+"rewardPoints": 25
+}
+
+**Get Monthly Report Endpoint**: http://localhost:8080/rewards/api/v1/monthlyreport?month=february Method: GET
+
+**Get Monthly Report Response**:
+
+[
+{
+"customer": {
+"id": "111-11-1111",
+"firstName": "Peter",
+"lastName": "Pan",
+"address": "200 Oak Crest Rd, Lafayette, LA 11111"
+},
+"totalPoints": 25
+},
+{
+"customer": {
+"id": "222-22-2222",
+"firstName": "Chris",
+"lastName": "Tipton",
+"address": "300 Oak Crest Rd, Lafayette, LA 11111"
+},
+"totalPoints": 40
+}
+]
+
+**Get Quartery Report EndPoint**: http://localhost:8080/rewards/api/v1/quarterlyreport?quarter=first Method: GET
+
+**Get Quarterly Report Response**:
+
+[
+{
+"customer": {
+"id": "222-22-2222",
+"firstName": "Chris",
+"lastName": "Tipton",
+"address": "300 Oak Crest Rd, Lafayette, LA 11111"
+},
+"totalPoints": 110
+},
+{
+"customer": {
+"id": "111-11-1111",
+"firstName": "Peter",
+"lastName": "Pan",
+"address": "200 Oak Crest Rd, Lafayette, LA 11111"
+},
+"totalPoints": 115
+}
+]
+
+Please refer to **https://github.com/vveludan/customer-rewards/tree/main/project-artifacts** for:
+1. Class Diagrams and Sequence Diagrams
+2. Response for various endpoints
+
