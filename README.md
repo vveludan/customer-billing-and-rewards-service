@@ -156,6 +156,8 @@ NOTE: Transforming domain classes to DTOs is not done.
 }
 ]
 
+NOTE: Once the app is up and running, view all **contracts/endpoints** using: localhost:8080/swagger-ui/
+
 Please refer to **https://github.com/vveludan/customer-rewards/tree/main/project-artifacts** for:
 1. Class Diagrams and Sequence Diagrams
 2. Response for various endpoints
