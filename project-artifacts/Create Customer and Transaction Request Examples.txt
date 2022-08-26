@@ -1,0 +1,118 @@
+Create Peter: Endpoint: http://localhost:8080/rewards/api/v1/customers  Method: POST
+====================================================================================
+{
+	"id": "111-11-1111",
+	"firstName": "Peter",
+	"lastName": "Pan",
+	"address": "200 Oak Crest Rd, Lafayette, LA 11111"
+}
+
+Create Peter Pan Transactions: http://localhost:8080/rewards/api/v1/transactions Method: POST
+=============================================================================================
+{
+	"customer": {
+		"id": "111-11-1111"
+	},
+	"billingDate": [2022, 1, 31],
+	"billingAmount": 50.0
+}
+-----------------------------------------------
+{
+	"customer": {
+		"id": "111-11-1111"
+	},
+	"billingDate": [2022, 2, 28],
+	"billingAmount": 75.0
+}
+----------------------------------------------
+{
+	"customer": {
+		"id": "111-11-1111"
+	},
+	"billingDate": [2022, 3, 31],
+	"billingAmount": 120.0
+}
+---------------------------------------------------------------------------------------
+{
+	"customer": {
+		"id": "111-11-1111"
+	},
+	"billingDate": [2022, 4, 30],
+	"billingAmount": 80.0
+}
+-----------------------------------------------
+{
+	"customer": {
+		"id": "111-11-1111"
+	},
+	"billingDate": [2022, 5, 31],
+	"billingAmount": 90.0
+}
+----------------------------------------------
+{
+	"customer": {
+		"id": "111-11-1111"
+	},
+	"billingDate": [2022, 6, 30],
+	"billingAmount": 110.0
+}
+-----------------------------------------------
+Create Chris Tipton: http://localhost:8080/rewards/api/v1/customers  Method: POST
+=================================================================================
+{
+	"id": "222-22-2222",
+	"firstName": "Chris",
+	"lastName": "Tipton",
+	"address": "300 Oak Crest Rd, Lafayette, LA 11111"
+}
+
+Create Chris Tipton's Transactions: http://localhost:8080/rewards/api/v1/transactions Method: POST
+==================================================================================================
+{
+	"customer": {
+		"id": "222-22-2222"
+	},
+	"billingDate": [2022, 1, 31],
+	"billingAmount": 70.0
+}
+-----------------------------------------------
+{
+	"customer": {
+		"id": "222-22-2222"
+	},
+	"billingDate": [2022, 2, 28],
+	"billingAmount": 90.0
+}
+----------------------------------------------
+{
+	"customer": {
+		"id": "222-22-2222"
+	},
+	"billingDate": [2022, 3, 31],
+	"billingAmount": 100.0
+}
+------------------------------------------------------------------
+{
+	"customer": {
+		"id": "222-22-2222"
+	},
+	"billingDate": [2022, 4, 30],
+	"billingAmount": 60.0
+}
+-----------------------------------------------
+{
+	"customer": {
+		"id": "222-22-2222"
+	},
+	"billingDate": [2022, 5, 31],
+	"billingAmount": 80.0
+}
+----------------------------------------------
+{
+	"customer": {
+		"id": "222-22-2222"
+	},
+	"billingDate": [2022, 6, 30],
+	"billingAmount": 90.0
+}
+------------------------------------------------------------------
